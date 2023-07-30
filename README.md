@@ -15,7 +15,7 @@
  - Diseño de UI  - **Luisa**
  - Estructura del proyecto en React según diseño UI- **Carlos Mario**
  - Logica de la funcion para consumir la data - **Jose y Javier**
- - Documentación - - **Jose y Javier**
+ - Documentación - - **Luisa**
 
 ## Configuración del Proyecto
 
