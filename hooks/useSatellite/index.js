@@ -4,9 +4,7 @@ import { twoline2satrec, propagate } from 'satellite.js';
 const platziSatTLE1 = '1 88888U 24001FA  23163.94096086  .00000000  00000-0  10000-4 0  9999';
 const platziSatTLE2 = '2 88888  97.5077 280.5424 0008220 228.6198 130.8530 15.11803180  1009'
 
-export default  function useSatellite () {
-
-    const [satelliteInfo, setSatelliteInfo] = React.useState(null);
+export default function useSatellite () {
 
     /**
      * Returns a satellite record object based on the given TLE strings. useful for calculations.
@@ -97,28 +95,27 @@ export default  function useSatellite () {
      */
     
     const getUserLocation = () => {
-
-        let userLocation = {};
-
-        if ('geolocation' in navigator) {
-            
-            // Get the user's location
-            navigator.geolocation.getCurrentPosition( (position) => {
-
-                userLocation.latitude = position.coords.latitude;
-                userLocation.longitude = position.coords.longitude;
-
-                }, (error) => {
+        return new Promise((resolve, reject) => {
+            if ('geolocation' in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const userLocation = {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    };
+                    resolve(userLocation);
+                },
+                (error) => {
                     console.error('Error getting user location:', error.message);
+                    reject(error);
                 }
                 );
-        } else {
-            // Geolocation API is not available in this browser
-            console.error('Geolocation is not supported in this browser.');
-        }
-
-        return userLocation;
-    }
+            } else {
+                console.error('Geolocation is not supported in this browser.');
+                reject(new Error('Geolocation is not supported in this browser.'));
+            }
+        });
+    };
 
     /**
      * Calculates the distance between two points on the Earth's surface using the Haversine formula.

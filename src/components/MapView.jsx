@@ -1,3 +1,4 @@
+import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import useSatellite from '../../hooks/useSatellite';
 
@@ -7,13 +8,21 @@ import '../styles/components/MapView.scss';
 
 export const MapView = () => {
 
+    const [mapCenter, setMapCenter] = React.useState([0, 0]); // Coordenadas para centrar el mapa inicialmente
+
     const {
         getUserLocation
     } = useSatellite();
 
-    const userLocation = getUserLocation();
+    React.useEffect(() => {
 
-    const mapCenter = [0, 0]; // Coordenadas para centrar el mapa inicialmente
+        const userLocationPromise = getUserLocation();
+
+        userLocationPromise.then((userLocation) => {
+            setMapCenter([userLocation.latitude, userLocation.longitude]);
+        });
+
+    }, [mapCenter]);
 
     return (
         <MapContainer center={mapCenter} zoom={3} scrollWheelZoom={false}>
