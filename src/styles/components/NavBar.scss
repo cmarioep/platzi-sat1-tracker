@@ -4,7 +4,22 @@
     align-items: center;
 
     width: 20%;
-    padding: 1.5rem;
+    padding: 2rem;
 
+    color: hsl(0, 0%, 100%);
     background-color: hsl(0, 0%, 3.53%);
+
+    &__features {
+        width: 100%;
+        margin-top: 3rem;
+        border: 1.5px solid hsl(0, 0%, 100%);
+        border-radius: 5px;
+
+        &__item {
+            padding: 0.8rem;
+            border: 1.5px solid hsl(0, 0%, 100%);
+
+            text-align: center;
+        }
+    }
 }
