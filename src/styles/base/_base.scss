@@ -1,0 +1,92 @@
+@use '../utils/' as *;
+
+* {
+    font-size: 1rem;
+    font-smooth: always;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    height: -webkit-fill-available;
+}
+
+
+html,
+html:focus-within {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    line-height: 1.5;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $serif;
+    line-height: 1.1;
+}
+
+
+h2 {
+    margin: 3rem 0;
+
+    text-align: center;
+}
+
+
+p,
+a,
+ul,
+ol,
+li {
+    font-family: $sans;
+    line-height: 1.3;
+}
+
+
+a {
+    text-decoration-line: none;
+}
+
+
+a:visited {
+    text-decoration: none;
+}
+
+
+ul,
+ol {
+    list-style: none;
+}
+
+
+li {
+    line-height: 1.5;
+}
+
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
