@@ -1,3 +1,10 @@
+@use '../utils/' as *;
+
 .layout {
     display: flex;
+    flex-direction: column;
+
+    @include mq(intermediate) {
+        flex-direction: row;
+    }
 }
