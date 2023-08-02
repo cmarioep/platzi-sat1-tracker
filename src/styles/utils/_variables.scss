@@ -2,3 +2,14 @@
 $sans: Calibre, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
 $serif: 'Times New Roman', Times, serif;
 $fancy:  'Muli', sans-serif;
+
+
+// Map breakpoints for media queries
+$breakpoints: (
+    small: 320px,
+    standar: 375px,
+    intermediate: 688px,
+    medium: 1024px,
+    large: 1280px,
+    xlarge: 1366px
+);
