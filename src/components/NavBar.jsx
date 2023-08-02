@@ -5,7 +5,7 @@ export const NavBar = () => {
     return (
         <nav className="navbar">
 
-            <Logo />
+            <Logo className="navbar__logo"/>
 
             <ul className='navbar__features'>
                 <li className='navbar__features__item'>Enfocar</li>

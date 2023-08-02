@@ -2,8 +2,6 @@ export const Logo = (props) => (
     <svg
         className="logo"
         xmlns="http://www.w3.org/2000/svg"
-        width={216}
-        height={37}
         fill="none"
         {...props}
     >
