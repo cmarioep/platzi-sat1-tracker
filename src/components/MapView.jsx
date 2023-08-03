@@ -18,7 +18,7 @@ export const MapView = () => {
         const positionAndVelocity = getSatelliteInfo(satRec, currentDate);
         const position = convertECItoLatLong(positionAndVelocity.position);
         setSatellitePosition(position);
-    }, [getSatRec, getSatelliteInfo, convertECItoLatLong]);
+    }, []);
 
     // Effect to get the user position
     useEffect(() => {
@@ -30,13 +30,13 @@ export const MapView = () => {
             .catch((error) => {
                 console.error('Error getting user location:', error.message);
             });
-    }, [getUserLocation]);
+    }, []);
 
     useEffect(() => {
         if (satellitePosition) {
             setMapCenter([satellitePosition.latitude, satellitePosition.longitude]);
         }
-    }, [satellitePosition]);
+    }, []);
 
     return (
         <MapContainer center={mapCenter} zoom={2} scrollWheelZoom={false}>
