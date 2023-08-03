@@ -1,9 +1,10 @@
-import { CurrentTime } from './CurrentTime';
 import { Logo } from './Logo';
+import { SatelliteInfo } from './SatelliteInfo';
 
 export const NavBar = () => {
 
     return (
+
         <nav className="navbar">
 
             <Logo className="navbar__logo" />
@@ -14,7 +15,7 @@ export const NavBar = () => {
                 <li className='navbar__features__item'>Mi estación</li>
             </ul>
 
-            <CurrentTime />
+            <SatelliteInfo />
 
         </nav>
 

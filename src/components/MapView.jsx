@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import useSatellite from '../hooks/useSatellite';
 
@@ -6,6 +6,7 @@ import "leaflet/dist/leaflet.css";
 import '../styles/components/MapView.scss';
 
 export const MapView = () => {
+
     const [mapCenter, setMapCenter] = useState([0, 0]);
     const [satellitePosition, setSatellitePosition] = useState(null);
     const [userPosition, setUserPosition] = useState(null);
