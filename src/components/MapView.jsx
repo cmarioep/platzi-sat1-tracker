@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import useSatellite from '../../hooks/useSatellite';
+import useSatellite from '../hooks/useSatellite';
 
 import "leaflet/dist/leaflet.css";
 import '../styles/components/MapView.scss';
