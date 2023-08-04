@@ -19,10 +19,9 @@ export const CurrentTime = () => {
 
 
     return (
-        <div>
-            <h2>Current Time:</h2>
+        <>
             <p>{formatDate(currentTime)}</p>
-        </div>
+        </>
     );
 };
 

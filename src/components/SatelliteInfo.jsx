@@ -26,8 +26,6 @@ export const SatelliteInfo = () => {
         <>
             <CurrentTime />
 
-            <br />
-
             <div>
                 {satellitePosition && (<p><span>Lat: </span>{satellitePosition.latitude.toFixed(6)}</p>)}
                 {satellitePosition && (<p><span>Long: </span>{satellitePosition.longitude.toFixed(6)}</p>)}
