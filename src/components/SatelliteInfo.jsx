@@ -1,6 +1,7 @@
 import { useEffect, useContext } from 'react';
 
 import { SatelliteContext } from '../context/SatelliteProvider';
+
 import useSatellite from '../hooks/useSatellite';
 import { useCurrentTime } from '../hooks/useCurrentTime';
 
