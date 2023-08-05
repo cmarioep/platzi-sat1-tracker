@@ -23,13 +23,21 @@ export const SatelliteInfo = () => {
     }, [currentTime])
 
     return (
-        <>
+        <div className='satelliteInfo'>
+
+            <h3 className='satelliteInfo__title'>Satellite Tracking</h3>
+
+            <p className='satelliteInfo__label'>Last Update</p>
             <CurrentTime />
 
-            <div>
-                {satellitePosition && (<p><span>Lat: </span>{satellitePosition.latitude.toFixed(6)}</p>)}
-                {satellitePosition && (<p><span>Long: </span>{satellitePosition.longitude.toFixed(6)}</p>)}
+            <div className='satelliteInfo__data'>
+                <p className='satelliteInfo__label'>Last Position</p>
+                <div>
+                    {satellitePosition && (<p><span>Lat: </span>{satellitePosition.latitude.toFixed(6)}</p>)}
+                    {satellitePosition && (<p><span>Long: </span>{satellitePosition.longitude.toFixed(6)}</p>)}
+                </div>
             </div>
-        </>
+
+        </div>
     )
 }
