@@ -1,13 +1,13 @@
 import React from 'react';
-import { twoline2satrec, propagate } from 'satellite.js';
+import { twoline2satrec, propagate, eciToGeodetic, gstime, degreesLong, degreesLat } from 'satellite.js';
+import { useCurrentTime } from '../useCurrentTime';
 
 const platziSatTLE1 = '1 88888U 24001FA  23163.94096086  .00000000  00000-0  10000-4 0  9999';
-const platziSatTLE2 = '2 88888  97.5077 280.5424 0008220 228.6198 130.8530 15.11803180  1009'
-
-const uno = "1 88888U 24001FA  23163.94096086  .00000000  00000-0  10000-4 0  9999"
-const dos = "2 88888  97.5077 280.5424 0008220 228.6198 130.8530 15.11803180  1009"
+const platziSatTLE2 = '2 88888  97.5077 280.5424 0008220 228.6198 130.8530 15.11803180  1009';
 
 export default function useSatellite() {
+
+    const currentTime = useCurrentTime();
 
     /**
      * Returns a satellite record object based on the given TLE strings. useful for calculations.
@@ -15,13 +15,11 @@ export default function useSatellite() {
      * @param {string} tle2 - The second line of the TLE.
      * @returns {Object} The satellite record object.
      */
-    const getSatRec = (tle1 = platziSatTLE1, tle2 = platziSatTLE2) => {
+    const getSatRec = (tle1, tle2) => {
         const satrec = twoline2satrec(tle1, tle2);
         return satrec;
     }
 
-
-    // Satellite info is an object with the position and velocity of the satellite in the given date. ECI coordenates format.
 
     /**
      * Returns an object with the position and velocity of the satellite in the given date. ECI coordinates format.
@@ -35,25 +33,34 @@ export default function useSatellite() {
     }
 
     /**
-     * Converts ECI coordinates to LatLong coordinates.
-     * @param {Object} position - An object with the x, y and z coordinates of the satellite in ECI format.
-     * @returns {Object} An object with the latitude and longitude of the satellite.
+     * Converts the given latitude and longitude from radians to degrees.
+     * @param {Object} radians - An object with the latitude and longitude in radians.
+     * @returns {Object} An object with the latitude and longitude in degrees.
      */
-    const convertECItoLatLong = (position) => {
-        const a = 6378.137;
-        const b = 6356.752314245;
-        const f = (a - b) / a;
-        const eSq = f * (2 - f);
-        const r = Math.sqrt(position.x ** 2 + position.y ** 2);
-        const longitude = Math.atan2(position.y, position.x);
-        const latitude = Math.atan2(position.z, r);
-        const N = a / Math.sqrt(1 - eSq * Math.sin(latitude) ** 2);
-        const height = r / Math.cos(latitude) - N;
-        const latitudeDeg = latitude * 180 / Math.PI;
-        const longitudeDeg = longitude * 180 / Math.PI;
-        return { latitude: latitudeDeg, longitude: longitudeDeg, height };
-    }
 
+    const convertRadiansToDegrees = (radians) => {
+        const long = degreesLong(radians.longitude);
+        const lat = degreesLat(radians.latitude);
+        return { latitude: lat, longitude: long };
+    };
+
+    
+    /**
+     * Returns the latitude and longitude of a satellite at the given date and time.
+     * @param {string} tle1 - The first line of the TLE.
+     * @param {string} tle2 - The second line of the TLE.
+     * @param {Date} date - The date and time for which to get the satellite position.
+     * @returns {Object} An object with the latitude and longitude of the satellite.
+    */
+    const getSatellitePosition = (tle1 = platziSatTLE1, tle2 = platziSatTLE2, date = currentTime) => {
+        console.log('getSatellitePosition', tle1, tle2, date);
+        const satrec = getSatRec(tle1, tle2);
+        const positionAndVelocity = getSatelliteInfo(satrec, date);
+        const radiansPosition = eciToGeodetic(positionAndVelocity.position, gstime(date));
+        const latLongPosition = convertRadiansToDegrees(radiansPosition);
+        return latLongPosition;
+    };
+  
     /**
      * Returns an array filled with objects with the latitude and longitude of the satellite.
      * @param {Object} satRec - The satellite record object.
@@ -66,7 +73,7 @@ export default function useSatellite() {
     // Here is an example:
 
     { /*
-        const startTime = new Date();
+        const startTime = new Date() | currentTime;
         const timeStep = 1000 * 60 ; // 1 minutes
         const numSteps = 20; // Number of steps in 20 minutes (1 minutes intervals)
     */}
@@ -77,11 +84,8 @@ export default function useSatellite() {
 
         for (let i = 0; i < numSteps; i++) {
 
-            // Propagate the satellite's orbit at the current time
-            const positionAndVelocity = propagate(satRec, startTime);
-
             // Convert the ECI position to latitude and longitude
-            const position = convertECItoLatLong(positionAndVelocity.position);
+            const position = getSatellitePosition()
 
             // Add the position to the positions array
             positions.push({ latitude: position.latitude, longitude: position.longitude });
@@ -137,10 +141,6 @@ export default function useSatellite() {
          * @returns {number} The angle in radians.
          */
 
-        const deg2rad = (deg) => {
-            return deg * (Math.PI / 180);
-        }
-
         const earthRadius = 6371; // Radius of the earth in kilometers
         const latDiffInRadians = deg2rad(lat2 - lat1); // Difference in latitude in radians
         const lonDiffInRadians = deg2rad(lon2 - lon1); // Difference in longitude in radians
@@ -155,13 +155,12 @@ export default function useSatellite() {
         return distance;
     }
 
+
     return {
-        getSatRec,
-        getSatelliteInfo,
-        convertECItoLatLong,
         predictSatellitePositions,
         getUserLocation,
-        getDistanceFromLatLonInKm
+        getDistanceFromLatLonInKm,
+        getSatellitePosition
     }
 
 }
