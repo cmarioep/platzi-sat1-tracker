@@ -45,29 +45,33 @@ export const MapView = () => {
     }, []);
 
     return (
-        <MapContainer center={mapCenter} zoom={2} scrollWheelZoom={false}>
-            <TileLayer
-                attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-                url='https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
-            />
-            {satellitePosition && (
-                <Marker position={[satellitePosition.latitude, satellitePosition.longitude]}>
-                    <Popup>
-                        Satellite Position. <br />
-                        Latitude: {satellitePosition.latitude} <br />
-                        Longitude: {satellitePosition.longitude}
-                    </Popup>
-                </Marker>
-            )}
-            {userPosition && (
-                <Marker position={[userPosition.latitude, userPosition.longitude]}>
-                    <Popup>
-                        Your Position. <br />
-                        Latitude: {userPosition.latitude} <br />
-                        Longitude: {userPosition.longitude}
-                    </Popup>
-                </Marker>
-            )}
-        </MapContainer>
+        <>
+            <MapContainer center={mapCenter} zoom={2} scrollWheelZoom={false}>
+                <TileLayer
+                    attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+                    url='https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
+                />
+                {satellitePosition && (
+                    <Marker position={[satellitePosition.latitude, satellitePosition.longitude]}>
+                        <Popup>
+                            Satellite Position. <br />
+                            Latitude: {satellitePosition.latitude} <br />
+                            Longitude: {satellitePosition.longitude}
+                        </Popup>
+                    </Marker>
+                )}
+                {userPosition && (
+                    <Marker position={[userPosition.latitude, userPosition.longitude]}>
+                        <Popup>
+                            Your Position. <br />
+                            Latitude: {userPosition.latitude} <br />
+                            Longitude: {userPosition.longitude}
+                        </Popup>
+                    </Marker>
+                )}
+            </MapContainer>
+
+            <button className="btn-focus">Focus</button>
+        </>
     );
 };

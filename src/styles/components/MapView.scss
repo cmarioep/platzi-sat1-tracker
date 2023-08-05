@@ -1,6 +1,7 @@
 .leaflet-container {
   height: 100vh;
   width: 100%;
+  overflow: hidden;
 }
 
 .leaflet-control-attribution {
@@ -9,4 +10,23 @@
 
 .leaflet-control-zoom {
   display: none;
+}
+
+.btn-focus {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  z-index: 1000;
+
+  width: 120px;
+  padding: 0.3rem;
+  border: 1px solid hsl(138.95, 42.6%, 56.27%);
+  border-radius: 5px;
+
+  font-size: 1.25rem;
+  color: white;
+  text-align: center;
+
+  cursor: pointer;
+  background-color: hsl(0, 0%, 3.53%);
 }
