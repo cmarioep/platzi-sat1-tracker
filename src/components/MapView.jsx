@@ -9,8 +9,8 @@ import useSatellite from '../hooks/useSatellite';
 import "leaflet/dist/leaflet.css";
 import '../styles/components/MapView.scss';
 
-import SatelliteIcon from '../../public/satelliteIcon.svg'
-import PositionIcon from '../../public/position.svg'
+import SatelliteIcon from '../assets/satelliteIcon.svg'
+import PositionIcon from '../assets/position.svg'
 
 // custom icon for satellite marker
 const CustomSatelliteIcon = L.icon({
