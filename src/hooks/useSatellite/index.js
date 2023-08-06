@@ -52,9 +52,8 @@ export default function useSatellite() {
      * @param {Date} date - The date and time for which to get the satellite position.
      * @returns {Object} An object with the latitude and longitude of the satellite.
     */
-    const getSatellitePosition = (tle1 = platziSatTLE1, tle2 = platziSatTLE2, date = currentTime) => {
-        console.log('getSatellitePosition', tle1, tle2, date);
-        const satrec = getSatRec(tle1, tle2);
+    const getSatellitePosition = (date = currentTime) => {
+        const satrec = getSatRec(platziSatTLE1, platziSatTLE2);
         const positionAndVelocity = getSatelliteInfo(satrec, date);
         const radiansPosition = eciToGeodetic(positionAndVelocity.position, gstime(date));
         const latLongPosition = convertRadiansToDegrees(radiansPosition);
@@ -78,14 +77,14 @@ export default function useSatellite() {
         const numSteps = 20; // Number of steps in 20 minutes (1 minutes intervals)
     */}
 
-    const predictSatellitePositions = (satRec, startTime, timeStep, numSteps) => {
+    const predictSatellitePositions = (startTime, timeStep, numSteps) => {
 
         const positions = [];
 
         for (let i = 0; i < numSteps; i++) {
 
             // Convert the ECI position to latitude and longitude
-            const position = getSatellitePosition()
+            const position = getSatellitePosition(startTime)
 
             // Add the position to the positions array
             positions.push({ latitude: position.latitude, longitude: position.longitude });

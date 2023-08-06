@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 
 import { SatelliteContext } from '../context/SatelliteProvider';
 
@@ -16,7 +16,14 @@ export const MapView = () => {
 
     const mapRef = useRef(null);
 
-    const { getSatellitePosition, getUserLocation } = useSatellite();
+    const { getSatellitePosition, getUserLocation, predictSatellitePositions } = useSatellite();
+
+
+    // Obtener la ruta del satélite con la función predictSatellitePositions
+    const startTime = new Date();
+    const timeStep = 1000 * 60; // 1 minutos
+    const numSteps = 40; // Number of steps in 20 minutes (1 minutes intervals)
+    const rutaSatelite = predictSatellitePositions(startTime, timeStep, numSteps);
 
 
     // Effect to get the satellite position
@@ -62,6 +69,7 @@ export const MapView = () => {
                     attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
                     url='https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
                 />
+                <Polyline positions={rutaSatelite.map((pos) => [pos.latitude, pos.longitude])} color="#60bf7e" />
                 {satellitePosition && (
                     <Marker position={[satellitePosition.latitude, satellitePosition.longitude]}>
                         <Popup>
