@@ -25,6 +25,44 @@ export const MapView = () => {
     const numSteps = 40; // Number of steps in 20 minutes (1 minutes intervals)
     const rutaSatelite = predictSatellitePositions(startTime, timeStep, numSteps);
 
+    // Nuevo estado para controlar la división de la ruta
+    const [routeSegments, setRouteSegments] = useState([]);
+
+    // Nuevo efecto para dividir la ruta cuando cruza los límites del mapa
+    useEffect(() => {
+        if (rutaSatelite.length > 1) {
+            const updatedSegments = [];
+            for (let i = 1; i < rutaSatelite.length; i++) {
+                const prevPos = rutaSatelite[i - 1];
+                const currPos = rutaSatelite[i];
+                const diffLng = Math.abs(currPos.longitude - prevPos.longitude);
+                if (diffLng > 180) {
+                    // Divide el segmento si cruza los límites del mapa
+                    const midpointLng = (currPos.longitude + prevPos.longitude) / 2;
+                    const firstSegment = rutaSatelite.slice(0, i);
+                    const secondSegment = rutaSatelite.slice(i);
+                    const updatedFirstSegment = firstSegment.map((pos) => ({
+                        latitude: pos.latitude,
+                        longitude: pos.longitude > 0 ? pos.longitude - 360 : pos.longitude,
+                    }));
+                    const updatedSecondSegment = secondSegment.map((pos) => ({
+                        latitude: pos.latitude,
+                        longitude: pos.longitude < 0 ? pos.longitude + 360 : pos.longitude,
+                    }));
+                    updatedSegments.push(updatedFirstSegment, updatedSecondSegment);
+                    break;
+                }
+            }
+            // Si no hubo división, muestra la ruta completa
+            if (updatedSegments.length === 0) {
+                setRouteSegments([rutaSatelite]);
+            } else {
+                setRouteSegments(updatedSegments);
+            }
+        }
+    }, [rutaSatelite]);
+
+
 
     // Effect to get the satellite position
     useEffect(() => {
@@ -69,7 +107,10 @@ export const MapView = () => {
                     attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
                     url='https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
                 />
-                <Polyline positions={rutaSatelite.map((pos) => [pos.latitude, pos.longitude])} color="#60bf7e" />
+                {routeSegments.map((segment, index) => (
+                    <Polyline key={index} positions={segment.map((pos) => [pos.latitude, pos.longitude])} color="#60bf7e" />
+                ))}
+                {/* <Polyline positions={rutaSatelite.map((pos) => [pos.latitude, pos.longitude])} color="#60bf7e" /> */}
                 {satellitePosition && (
                     <Marker position={[satellitePosition.latitude, satellitePosition.longitude]}>
                         <Popup>
