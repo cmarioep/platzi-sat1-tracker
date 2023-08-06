@@ -13,6 +13,13 @@ export default defineConfig({
         workbox: {
           globPatterns: ['**/*.{js,css,html,png,webp}'],
         },
+        build: {
+          rollupOptions: {
+            output: {
+              assetFileNames: `assets/[name].[ext]`
+            }
+          }
+        },
         manifest: {
           name: 'Satellite Tracker',
           short_name: 'Platzi-Sat1-Tracker',

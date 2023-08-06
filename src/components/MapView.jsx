@@ -11,7 +11,7 @@ import '../styles/components/MapView.scss';
 
 // custom icon for satellite marker
 const CustomSatelliteIcon = L.icon({
-    iconUrl: 'public/satelliteIcon.svg',
+    iconUrl: 'src/assets/satelliteIcon.svg',
     iconSize: [48, 48],
     iconAnchor: [15, 30],
 });
@@ -19,7 +19,7 @@ const CustomSatelliteIcon = L.icon({
 
 // custom icon for position marker
 const CustomPositionIcon = L.icon({
-    iconUrl: 'public/position.svg',
+    iconUrl: 'src/assets/position.svg',
     iconSize: [32, 32],
     iconAnchor: [15, 30],
 });
