@@ -16,18 +16,15 @@ export const MapView = () => {
 
     const mapRef = useRef(null);
 
-    const { getSatRec, getSatelliteInfo, convertECItoLatLong, getUserLocation } = useSatellite();
+    const { getSatellitePosition, getUserLocation } = useSatellite();
 
 
     // Effect to get the satellite position
     useEffect(() => {
-        const satRec = getSatRec();
-        const currentDate = new Date();
-        const positionAndVelocity = getSatelliteInfo(satRec, currentDate);
-        const position = convertECItoLatLong(positionAndVelocity.position);
-        setSatellitePosition(position);
+        const satellitePosition = getSatellitePosition();
+        setSatellitePosition(satellitePosition);
+    }, []);
 
-    }, [])
 
     // Effect to get the user position
     useEffect(() => {

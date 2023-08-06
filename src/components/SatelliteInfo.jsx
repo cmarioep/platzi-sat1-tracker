@@ -9,18 +9,19 @@ import { CurrentTime } from './CurrentTime';
 
 
 export const SatelliteInfo = () => {
+
     const { satellitePosition, setSatellitePosition } = useContext(SatelliteContext);
-    const { getSatRec, getSatelliteInfo, convertECItoLatLong, getUserLocation } = useSatellite();
+    const { getSatellitePosition, getUserLocation } = useSatellite();
 
     const currentTime = useCurrentTime();
 
+
     // Effect to get the satellite position
     useEffect(() => {
-        const satRec = getSatRec();
-        const positionAndVelocity = getSatelliteInfo(satRec, currentTime);
-        const position = convertECItoLatLong(positionAndVelocity.position);
-        setSatellitePosition(position);
+        const satellitePosition = getSatellitePosition();
+        setSatellitePosition(satellitePosition);
     }, [currentTime])
+
 
     return (
         <div className='satelliteInfo'>
