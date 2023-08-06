@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
+import L from 'leaflet';
 
 import { SatelliteContext } from '../context/SatelliteProvider';
 
@@ -7,6 +8,21 @@ import useSatellite from '../hooks/useSatellite';
 
 import "leaflet/dist/leaflet.css";
 import '../styles/components/MapView.scss';
+
+// custom icon for satellite marker
+const CustomSatelliteIcon = L.icon({
+    iconUrl: 'src/assets/satelliteIcon.svg',
+    iconSize: [48, 48],
+    iconAnchor: [15, 30],
+});
+
+
+// custom icon for position marker
+const CustomPositionIcon = L.icon({
+    iconUrl: 'src/assets/position.svg',
+    iconSize: [32, 32],
+    iconAnchor: [15, 30],
+});
 
 
 export const MapView = () => {
@@ -110,9 +126,8 @@ export const MapView = () => {
                 {routeSegments.map((segment, index) => (
                     <Polyline key={index} positions={segment.map((pos) => [pos.latitude, pos.longitude])} color="#60bf7e" />
                 ))}
-                {/* <Polyline positions={rutaSatelite.map((pos) => [pos.latitude, pos.longitude])} color="#60bf7e" /> */}
                 {satellitePosition && (
-                    <Marker position={[satellitePosition.latitude, satellitePosition.longitude]}>
+                    <Marker position={[satellitePosition.latitude, satellitePosition.longitude]} icon={CustomSatelliteIcon}>
                         <Popup>
                             Satellite Position. <br />
                             Latitude: {satellitePosition.latitude} <br />
@@ -121,7 +136,7 @@ export const MapView = () => {
                     </Marker>
                 )}
                 {userPosition && (
-                    <Marker position={[userPosition.latitude, userPosition.longitude]}>
+                    <Marker position={[userPosition.latitude, userPosition.longitude]} icon={CustomPositionIcon}>
                         <Popup>
                             Your Position. <br />
                             Latitude: {userPosition.latitude} <br />
