@@ -1,5 +1,8 @@
 # Platzi-sat1-Tracker
 
+"Platzi-sat1-Tracker" es una aplicación web desarrollada usando React y la librería satellite.js para mostrar información en tiempo real sobre el satélite FossaSat-FX14 (Platzi-Sat1).
+
+El proyecto permite obtener y mostrar información actualizada sobre el satélite basada en los Elementos de Dos Líneas (TLE) asocidos al satélite. Utilizando la librería satellite.js, se traza la órbita y la trayectoria del  FossaSat-FX14 en un mapa interactivo. Esto permite a los usuarios tener una comprensión visual srobre su posición en tiempo real y la trayectoria en los proximos 40 minutos .
 
 ## Configuración del Proyecto
 
