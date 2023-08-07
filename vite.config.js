@@ -11,7 +11,7 @@ export default defineConfig({
       {
         registerType: 'autoUpdate',
         workbox: {
-          globPatterns: ['**/*.{js,css,html,png,webp}'],
+          globPatterns: ['**/*.{js,css,html,png,webp,svg}'],
         },
         build: {
           rollupOptions: {

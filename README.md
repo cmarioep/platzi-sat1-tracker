@@ -1,21 +1,5 @@
 # Platzi-sat1-Tracker
 
- - Diseño de UI
- - Structura del proyecto en React
- - Logica de la funcion para consumir la data
- - Documentación
-
-# Funcionalidades Basicas
-
- - Mostrar la ruta y posicion actual del satelite
- - Predecir la posición del satelite al largo del dia en una coordenada definida por el usuario
-
-# Tareas por hacer
-
- - Diseño de UI  - **Luisa**
- - Estructura del proyecto en React según diseño UI- **Carlos Mario**
- - Logica de la funcion para consumir la data - **Jose y Javier**
- - Documentación - - **Luisa**
 
 ## Configuración del Proyecto
 
@@ -41,14 +25,42 @@ Iniciar el proyecto en modo desarrollo
 
 ## Generación de Build para produccíon
 
-1. Generate a full static production build
+1. Generar archivos estaticos para producción
 
    ```sh
    npm run build
    ```
 
-1. Preview the site as it will appear once deployed
+1. Previsualizar la App tal como aparecerá en producción
 
    ```sh
    npm run preview
    ```
+
+## ¿PWA?
+
+**Platzi-sat1-Tracker**  Está diseñada para ofrecer una experiencia de usuario rápida, confiable y atractiva, independientemente del dispositivo o navegador utilizado. Como una PWA (Progressive Web App) combina las mejores características de una aplicación móvil y una página web, adaptandose a las capacidades del dispositivo y del navegador del usuario.
+
+
+## Ventajas:
+
+- **Acceso sin instalación:** Los usuarios pueden acceder a la aplicación directamente desde su navegador web, sin necesidad de instalar la aplicación desde una tienda de aplicaciones.
+
+- **Experiencia de usuario mejorada:** ofrecen una experiencia similar a la de una aplicación nativa, con tiempos de carga más rápidos y una navegación fluida.
+
+- **Responsividad y adaptabilidad:** Se adaptan a diferentes tamaños de pantalla y dispositivos, lo que la hace adecuada para su uso en computadoras de escritorio, tabletas y teléfonos móviles.
+
+- **Conexión de red limitada o inestable:** pueden funcionar offline o en condiciones de red poco confiables, almacenando en caché los recursos importantes.
+
+- **Actualizaciones automáticas:** Al ser una aplicación web, las actualizaciones se implementan automáticamente, lo que garantiza que los usuarios siempre tengan la última versión.
+
+- **Menor consumo de datos:** Comparada con aplicaciones nativa, **Platzi-sat1-Tracker** tiende a utilizar menos datos, lo que beneficia a los usuarios con planes de datos limitados.
+
+ - **Integración con el dispositivo:** Al ser una PWAs puedra acceder a ciertas características del dispositivo, como notificaciones push, cámara y geolocalización.
+
+
+## Cómo hacer la instalación en un dispositivo:
+
+- **Desde el navegador:** Cuando un usuario visita **Platzi-sat1-Tracker** , algunos navegadores modernos, como Google Chrome, mostrarán automáticamente una opción para **"Agregar a la pantalla de inicio" o "Instalar"** la aplicación. Al seleccionar esta opción, la PWA se agregará a la pantalla de inicio del dispositivo.
+
+
