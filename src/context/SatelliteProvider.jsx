@@ -7,9 +7,10 @@ export const SatelliteContext = createContext();
 export const SatelliteProvider = ({ children }) => {
 
     const [satellitePosition, setSatellitePosition] = useState(null);
+    const [showSatelliteInfo, setShowSatelliteInfo] = useState(false);
 
     return (
-        <SatelliteContext.Provider value={{ satellitePosition, setSatellitePosition }}>
+        <SatelliteContext.Provider value={{ satellitePosition, setSatellitePosition, showSatelliteInfo, setShowSatelliteInfo }}>
             {children}
         </SatelliteContext.Provider>
     )

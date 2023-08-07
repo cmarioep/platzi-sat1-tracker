@@ -10,11 +10,10 @@ import { CurrentTime } from './CurrentTime';
 
 export const SatelliteInfo = () => {
 
-    const { satellitePosition, setSatellitePosition } = useContext(SatelliteContext);
+    const { satellitePosition, setSatellitePosition, showSatelliteInfo } = useContext(SatelliteContext);
     const { getSatellitePosition, getUserLocation } = useSatellite();
 
     const currentTime = useCurrentTime();
-
 
     // Effect to get the satellite position
     useEffect(() => {
@@ -24,7 +23,7 @@ export const SatelliteInfo = () => {
 
 
     return (
-        <div className='satelliteInfo'>
+        <div className={showSatelliteInfo ? 'satelliteInfo satelliteInfo--show' : 'satelliteInfo'}>
 
             <h3 className='satelliteInfo__title'>Satellite Tracking</h3>
 

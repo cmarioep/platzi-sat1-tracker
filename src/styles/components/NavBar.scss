@@ -18,9 +18,20 @@
     }
 
 
+    &__icon {
+        width: 36px;
+        fill: white;
+
+        @include mq(intermediate) {
+            display: none;
+        }
+    }
+
+
     &__logo {
         width: 216px;
-        height: 37px;
+        height: 36px;
+        margin: 0 auto;
     }
 
 

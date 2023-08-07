@@ -9,6 +9,19 @@
     border: 2px solid hsl(0, 0%, 100%);
     border-radius: 5px;
 
+    &--show {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10000;
+
+        display: block;
+
+        width: 90%;
+
+        background-color: hsla(0, 0%, 3.53%, 0.7);
+    }
+
 
     @include mq(intermediate) {
         display: block;

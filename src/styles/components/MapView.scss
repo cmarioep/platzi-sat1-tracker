@@ -12,13 +12,20 @@
   display: none;
 }
 
-.btn-focus {
+.controls {
+  display: flex;
+  justify-content: space-around;
+
   position: absolute;
   top: 90%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
 
+  width: 70%;
+}
+
+.btn-focus {
   width: 120px;
   padding: 0.3rem;
   border: 1.5px solid hsl(138.95, 42.6%, 56.27%);

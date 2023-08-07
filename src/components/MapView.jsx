@@ -29,7 +29,7 @@ const CustomPositionIcon = L.icon({
 
 
 export const MapView = () => {
-    const { satellitePosition, setSatellitePosition } = useContext(SatelliteContext);
+    const { satellitePosition, setSatellitePosition, showSatelliteInfo, setShowSatelliteInfo } = useContext(SatelliteContext);
     const [mapCenter, setMapCenter] = useState([0, 0]);
     const [userPosition, setUserPosition] = useState(null);
 
@@ -119,6 +119,11 @@ export const MapView = () => {
         }
     }
 
+    // Function to handle show more button click
+    const handleShowSatelliteInfo = () => {
+        setShowSatelliteInfo(!showSatelliteInfo);
+    }
+
     return (
         <>
             <MapContainer ref={mapRef} center={mapCenter} zoom={2} scrollWheelZoom={true} minZoom={2} maxZoom={8}>
@@ -149,7 +154,10 @@ export const MapView = () => {
                 )}
             </MapContainer>
 
-            <button className="btn-focus" onClick={handleFocusButton}>Focus</button>
+            <div className="controls">
+                <button className="btn-focus" onClick={handleFocusButton}>Focus</button>
+                <button className="btn-focus" onClick={handleShowSatelliteInfo}>{showSatelliteInfo ? 'Show less' : 'Show more'}</button>
+            </div>
         </>
     );
 };
