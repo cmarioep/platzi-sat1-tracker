@@ -155,8 +155,8 @@ export const MapView = () => {
             </MapContainer>
 
             <div className="controls">
-                <button className="btn-focus" onClick={handleFocusButton}>Focus</button>
-                <button className="btn-focus" onClick={handleShowSatelliteInfo}>{showSatelliteInfo ? 'Show less' : 'Show more'}</button>
+                <button className="btn" onClick={handleFocusButton}>Focus</button>
+                <button className="btn btn-showInfo" onClick={handleShowSatelliteInfo}>{showSatelliteInfo ? 'Show less' : 'Show more'}</button>
             </div>
         </>
     );
