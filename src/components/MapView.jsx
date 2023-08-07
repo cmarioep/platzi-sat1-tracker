@@ -138,8 +138,8 @@ export const MapView = () => {
                     <Marker position={[satellitePosition.latitude, satellitePosition.longitude]} icon={CustomSatelliteIcon}>
                         <Popup>
                             Satellite Position. <br />
-                            Latitude: {satellitePosition.latitude} <br />
-                            Longitude: {satellitePosition.longitude}
+                            Latitude: {satellitePosition.latitude.toFixed(6)} <br />
+                            Longitude: {satellitePosition.longitude.toFixed(6)}
                         </Popup>
                     </Marker>
                 )}
@@ -147,8 +147,8 @@ export const MapView = () => {
                     <Marker position={[userPosition.latitude, userPosition.longitude]} icon={CustomPositionIcon}>
                         <Popup>
                             Your Position. <br />
-                            Latitude: {userPosition.latitude} <br />
-                            Longitude: {userPosition.longitude}
+                            Latitude: {userPosition.latitude.toFixed(6)} <br />
+                            Longitude: {userPosition.longitude.toFixed(6)}
                         </Popup>
                     </Marker>
                 )}
