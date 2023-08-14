@@ -114,7 +114,7 @@ export const MapView = () => {
     // Function to handle the "Focus" button click
     const handleFocusButton = () => {
         if (mapRef.current && satellitePosition) {
-            mapRef.current.setView([satellitePosition.latitude, satellitePosition.longitude], 5);
+            mapRef.current.setView([satellitePosition.latitude, satellitePosition.longitude], 4);
             // Set the map view to the satellite position with a zoom level of 10 (adjust the zoom level as needed)
         }
     }
